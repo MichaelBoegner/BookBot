@@ -4,9 +4,10 @@ def main():
     word_count, words = get_word_count(book)
     char_count = get_chars(words)
     print(f"{word_count} words found in the book.")
-    for char in char_count:
-        print(f"The {char} character was found {char_count[char]} times!")
-
+    char_list = get_char_count_to_list(char_count)
+    for tuple in char_list: 
+        print(f"The character {tuple[0]} occurs {tuple[1]} times.")
+        
 
 def get_book():
     with open("./books/frankenstein.txt") as f:
@@ -25,5 +26,11 @@ def get_chars(words):
         else:
             char_count[char] = 1
     return char_count
+
+def get_char_count_to_list(char_count):
+    char_list = []
+    for char in char_count:
+        char_list.append((char, char_count[char]))
+    return sorted(char_list)
 
 main()
